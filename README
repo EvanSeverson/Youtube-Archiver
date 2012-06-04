@@ -2,6 +2,8 @@ Youtube Archiver by Evan
 https://github.com/Evbot/Youtube-Archiver
 
 Java application to easily download and manage Youtube Videoos.
+Youtube Archiver has a UserScript that can be used to make archiving
+	videos much easier. Check to see if your browser supports UserScirpts.
 
 Configuration variables
 	Save To: Directory to save archived videos.

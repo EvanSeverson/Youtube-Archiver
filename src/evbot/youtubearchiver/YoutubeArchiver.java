@@ -11,6 +11,8 @@ import evbot.youtubearchiver.gui.MainFrame;
 public class YoutubeArchiver {
 	
 	public static ConfigLoader configLoader;
+	
+	public static MainFrame mainFrame;
 
 
 	public static void main(String[] args) {
@@ -25,18 +27,20 @@ public class YoutubeArchiver {
 		}
 		
 		configLoader = new ConfigLoader("config.ini");
-		configLoader.loadConfig();
+		mainFrame = new MainFrame();
 		
-		SwingUtilities.invokeLater(new Runnable() {
+		if(!configLoader.loadConfig()) {
 			
-			@Override
-			public void run() {
+			SwingUtilities.invokeLater(new Runnable() {
 				
-				MainFrame mainFrame = new MainFrame();
-				mainFrame.setVisible(true);
-				
-			}
-		});
+				@Override
+				public void run() {
+					
+					mainFrame.setVisible(true);
+					
+				}
+			});
+		}
 		
 	}
 
