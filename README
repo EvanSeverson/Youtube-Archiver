@@ -7,5 +7,5 @@ Configuration variables
 	Save To: Directory to save archived videos.
 	Download Speed Limit: Max download bandwidth. 0 for no limit.
 	Max Download Threads: Max number of simultaneous threads downloading. 0 for no limit.
-	Zip Videos: Whether or not to put videos into zip archives.
+	Zip Archives: Whether or not to put videos into zip archives.
 	Timestamp Videos: Puts a date at the beginning of archives.

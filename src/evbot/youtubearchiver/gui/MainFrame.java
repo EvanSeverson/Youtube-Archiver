@@ -39,7 +39,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Exception e){
-			//Unable to set window theme
+			System.err.println("Unable to set theme");
+			e.printStackTrace();
 		}
 		
 		tabbedPane = new JTabbedPane();
