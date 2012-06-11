@@ -5,9 +5,17 @@ Java application to easily download and manage Youtube Videoos.
 Youtube Archiver has a UserScript that can be used to make archiving
 	videos much easier. Check to see if your browser supports UserScirpts.
 
+To install the userscript to your default browser just click on Install UserScript in the GUI.
+
+
+
 Configuration variables
 	Save To: Directory to save archived videos.
 	Download Speed Limit: Max download bandwidth. 0 for no limit.
 	Max Download Threads: Max number of simultaneous threads downloading. 0 for no limit.
 	Zip Archives: Whether or not to put videos into zip archives.
 	Timestamp Videos: Puts a date at the beginning of archives.
+
+If you wish to change the timestamp format you can edit the "config.ini" file under "timestamp-format". Be carefull not to use illegal characters.
+
+To prevent the GUI from prompting on start you can edit the "config.ini" file under "show-gui" to false.

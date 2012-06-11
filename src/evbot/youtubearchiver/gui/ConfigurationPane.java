@@ -94,7 +94,7 @@ public class ConfigurationPane extends JPanel implements ActionListener, KeyList
 				new ConfigurationField("Download Speed Limit:", downloadSpeedLimitTextField, downloadSpeedLimitLabel);
 		
 		maxThreadsTextField = new JTextField(5);
-		maxThreadsTextField.setText("15");
+		maxThreadsTextField.setText("5");
 		maxThreadsTextField.addKeyListener(this);
 		maxThreadsConfigurationField =
 				new ConfigurationField("Max Downlaod Threads:", maxThreadsTextField);
@@ -117,7 +117,7 @@ public class ConfigurationPane extends JPanel implements ActionListener, KeyList
 		add(maxThreadsConfigurationField);
 		add(zipArchivesConfigurationField);
 		add(timeStampConfigurationField);
-		add(save);
+//		add(save);
 		
 	}
 	
@@ -175,20 +175,25 @@ public class ConfigurationPane extends JPanel implements ActionListener, KeyList
 		
 		if(command.equals("Save")) {
 			
-			if(!checkFields()) {
-				return;
-			}
-			
-			applyConfig();
-			YoutubeArchiver.configLoader.saveConfig(
-					saveDirectoryTextField.getText(),
-					downloadSpeedLimitTextField.getText(),
-					maxThreadsTextField.getText(),
-					zipArchivesCheckBox.isSelected(),
-					timeStampCheckBox.isSelected(),
-					Configuration.TIMESTAMP_FORMAT.toPattern());
+			saveConfiguration();
 		}
 		
+	}
+
+	public void saveConfiguration() {
+		if(!checkFields()) {
+			return;
+		}
+		
+		applyConfig();
+		YoutubeArchiver.CONFIG_LOADER.saveConfig(
+				saveDirectoryTextField.getText(),
+				downloadSpeedLimitTextField.getText(),
+				maxThreadsTextField.getText(),
+				zipArchivesCheckBox.isSelected(),
+				timeStampCheckBox.isSelected(),
+				Configuration.TIMESTAMP_FORMAT.toPattern(),
+				Configuration.SHOW_GUI);
 	}
 
 	@Override

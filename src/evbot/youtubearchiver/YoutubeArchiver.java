@@ -1,46 +1,56 @@
 package evbot.youtubearchiver;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.PrintStream;
 
 import javax.swing.SwingUtilities;
 
 import evbot.youtubearchiver.config.ConfigLoader;
+import evbot.youtubearchiver.config.Configuration;
 import evbot.youtubearchiver.gui.MainFrame;
+import evbot.youtubearchiver.httpserver.ConnectionHandler;
 
 public class YoutubeArchiver {
 	
-	public static ConfigLoader configLoader;
+	public static ConfigLoader CONFIG_LOADER;
 	
-	public static MainFrame mainFrame;
+	public static MainFrame MAIN_FRAME;
 
 
 	public static void main(String[] args) {
 		
 		System.out.println("Starting Youtube-Archiver by Evan");
 		
-		try {
-			PrintStream err = new PrintStream("errors.txt");
-			System.setErr(err);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			PrintStream err = new PrintStream(new FileOutputStream("errors.txt", true));
+//			System.setErr(err);
+//		} catch (FileNotFoundException e) {
+//			e.printStackTrace();
+//		}
 		
-		configLoader = new ConfigLoader("config.ini");
-		mainFrame = new MainFrame();
+		CONFIG_LOADER = new ConfigLoader("config.ini");
+		MAIN_FRAME = new MainFrame();
 		
-		if(!configLoader.loadConfig()) {
+		if(!CONFIG_LOADER.loadConfig() || Configuration.SHOW_GUI) {
 			
 			SwingUtilities.invokeLater(new Runnable() {
 				
 				@Override
 				public void run() {
 					
-					mainFrame.setVisible(true);
+					MAIN_FRAME.setVisible(true);
 					
 				}
 			});
+		} else {
+			startServer();
 		}
+		
+	}
+	
+	public static void startServer() {
+		new ConnectionHandler().start();
 		
 	}
 

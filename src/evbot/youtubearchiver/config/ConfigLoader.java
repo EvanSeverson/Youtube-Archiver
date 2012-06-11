@@ -50,7 +50,7 @@ public class ConfigLoader {
 			
 			boolean returnval = true;
 			
-			if(configMap.containsKey("save-direcotry")) {
+			if(configMap.containsKey("save-directory")) {
 				File saveDirectory = new File(configMap.get("save-directory"));
 				Configuration.SAVE_DIR = saveDirectory;
 			} else {
@@ -110,12 +110,27 @@ public class ConfigLoader {
 			} else {
 				returnval = false;
 			}
-			
+
 			if(configMap.containsKey("timestamp-format")) {
 				Configuration.TIMESTAMP_FORMAT = new SimpleDateFormat(configMap.get("timestamp-format"));
 			} else {
 				returnval = false;
 			}
+			
+			if(configMap.containsKey("show-gui")) {
+				String showGUI = configMap.get("show-gui");
+				if(showGUI.equalsIgnoreCase("true")) {
+					Configuration.SHOW_GUI = true;
+				} else if(showGUI.equalsIgnoreCase("false")) {
+					Configuration.SHOW_GUI = false;
+				} else {
+					returnval = false;
+				}
+			} else {
+				returnval = false;
+			}
+			
+			return returnval;
 			
 		} catch (FileNotFoundException e) {
 			System.out.println("No configuration file found, using default settings.");
@@ -125,7 +140,7 @@ public class ConfigLoader {
 		
 	}
 	
-	public void saveConfig(String saveDir, String downloadLimit, String downloadThreads, boolean zipArchives, boolean timestampVideos, String timestampFormat) {
+	public void saveConfig(String saveDir, String downloadLimit, String downloadThreads, boolean zipArchives, boolean timestampVideos, String timestampFormat, boolean showGUI) {
 		
 		try {
 			PrintStream out = new PrintStream(configFile);
@@ -134,7 +149,8 @@ public class ConfigLoader {
 			out.println("download-threads=" + downloadThreads);
 			out.println("zip-archives=" + zipArchives);
 			out.println("timestamp-videos=" + timestampVideos);
-			out.println("timestampFormat=" + timestampFormat);
+			out.println("timestamp-format=" + timestampFormat);
+			out.println("show-gui=" + showGUI);
 			out.close();
 		} catch (FileNotFoundException e) {
 			System.err.println("Unable to esablish config file print stream");

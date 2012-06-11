@@ -17,6 +17,8 @@ import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
 
+import evbot.youtubearchiver.YoutubeArchiver;
+import evbot.youtubearchiver.httpserver.ConnectionHandler;
 import evbot.youtubearchiver.httpserver.ScriptInstaller;
 
 public class MainFrame extends JFrame implements ActionListener{
@@ -93,6 +95,16 @@ public class MainFrame extends JFrame implements ActionListener{
 			} catch (URISyntaxException e1) {
 				e1.printStackTrace();
 			}
+		}
+		
+		if(command.equals("OK")) {
+			configurationPane.saveConfiguration();
+			setVisible(false);
+			YoutubeArchiver.startServer();
+		}
+		
+		if(command.equals("Cancel")) {
+			System.exit(0);
 		}
 		
 	}

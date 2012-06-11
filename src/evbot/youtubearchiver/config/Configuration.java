@@ -18,13 +18,16 @@ public class Configuration {
 	
 	public static SimpleDateFormat TIMESTAMP_FORMAT;
 	
+	public static boolean SHOW_GUI;
+	
 	static {
 		
 		DOWNLOAD_SPEED_LIMIT = 0;
-		MAX_DOWNLOAD_THREADS = 15;
+		MAX_DOWNLOAD_THREADS = 5;
 		ZIP_ARCHIVES = true;
 		TIMESTAMP_VIDEOS = false;
-		TIMESTAMP_FORMAT = new SimpleDateFormat("yyyy/MM/dd");
+		TIMESTAMP_FORMAT = new SimpleDateFormat("yyyy-MM-dd");
+		SHOW_GUI = true;
 		
 	}
 	
