@@ -21,7 +21,14 @@ public class VideoQueue{
 		LOCATION_QUEUE.add(location);
 		
 		if(!DOWNLOADING) {
-			downloadCue();
+			new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					downloadCue();
+					
+				}
+			}).start();
 		}
 		
 	}

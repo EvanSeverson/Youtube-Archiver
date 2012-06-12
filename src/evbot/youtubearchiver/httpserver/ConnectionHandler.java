@@ -13,6 +13,7 @@ import java.net.UnknownHostException;
 import java.util.StringTokenizer;
 
 import evbot.youtubearchiver.config.Configuration;
+import evbot.youtubearchiver.download.Playlist;
 import evbot.youtubearchiver.download.VideoListFetcher;
 import evbot.youtubearchiver.download.VideoQueue;
 
@@ -103,6 +104,12 @@ public class ConnectionHandler {
 					}
 				} else if(address.startsWith("playlist/")) {
 					sendCloseTab(out);
+					String playlistID = address.substring(address.indexOf("/") + 1);
+					Playlist pl = new Playlist(playlistID);
+					String[] ids = VideoListFetcher.getPlaylist(playlistID);
+					for(String id : ids) {
+						VideoQueue.addToQueue(id, new File(Configuration.SAVE_DIR, "Playlists/" + pl.getName() + "[" + pl.getAuthor() + "][" + playlistID + "]"));
+					}
 				} else {
 					sendError(out);
 				}
